@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PokemonListViewController.swift
 //  Pokemon-MVVM
 //
 //  Created by Teguh Wibowo Wijaya on 15/03/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class PokemonListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
