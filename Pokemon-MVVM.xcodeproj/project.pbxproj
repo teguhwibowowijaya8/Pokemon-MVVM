@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		7AC6ABE329C2AF350014CAF7 /* GetPokemonListImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC6ABE229C2AF350014CAF7 /* GetPokemonListImageService.swift */; };
 		7AC6ABE529C2B1B30014CAF7 /* PokemonDetailImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC6ABE429C2B1B30014CAF7 /* PokemonDetailImageModel.swift */; };
 		7AC6ABE729C2D8720014CAF7 /* String+capitalizeFirstLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC6ABE629C2D8720014CAF7 /* String+capitalizeFirstLetter.swift */; };
+		7AC6ABE929C2FA320014CAF7 /* PokemonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC6ABE829C2FA320014CAF7 /* PokemonDetailViewModel.swift */; };
 		7AF68B9729C1BB3A00B0AFA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF68B9629C1BB3A00B0AFA0 /* AppDelegate.swift */; };
 		7AF68B9929C1BB3A00B0AFA0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF68B9829C1BB3A00B0AFA0 /* SceneDelegate.swift */; };
 		7AF68B9B29C1BB3A00B0AFA0 /* PokemonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF68B9A29C1BB3A00B0AFA0 /* PokemonListViewController.swift */; };
@@ -52,6 +53,7 @@
 		7AC6ABE229C2AF350014CAF7 /* GetPokemonListImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPokemonListImageService.swift; sourceTree = "<group>"; };
 		7AC6ABE429C2B1B30014CAF7 /* PokemonDetailImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailImageModel.swift; sourceTree = "<group>"; };
 		7AC6ABE629C2D8720014CAF7 /* String+capitalizeFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+capitalizeFirstLetter.swift"; sourceTree = "<group>"; };
+		7AC6ABE829C2FA320014CAF7 /* PokemonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewModel.swift; sourceTree = "<group>"; };
 		7AF68B9329C1BB3A00B0AFA0 /* Pokemon-MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pokemon-MVVM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AF68B9629C1BB3A00B0AFA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AF68B9829C1BB3A00B0AFA0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 		7AF68BD429C1CC7B00B0AFA0 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				7AC6ABE829C2FA320014CAF7 /* PokemonDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -387,7 +390,7 @@
 				};
 			};
 			buildConfigurationList = 7AF68B8E29C1BB3A00B0AFA0 /* Build configuration list for PBXProject "Pokemon-MVVM" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -431,6 +434,7 @@
 				7AF68B9B29C1BB3A00B0AFA0 /* PokemonListViewController.swift in Sources */,
 				7AF68BC229C1C3BC00B0AFA0 /* MovesModel.swift in Sources */,
 				7AF68BD729C1CD1D00B0AFA0 /* GetAPIService.swift in Sources */,
+				7AC6ABE929C2FA320014CAF7 /* PokemonDetailViewModel.swift in Sources */,
 				7AC6ABE329C2AF350014CAF7 /* GetPokemonListImageService.swift in Sources */,
 				7AC6ABDF29C2AD3E0014CAF7 /* UIImageView+loadImageURL.swift in Sources */,
 				7AF68BE229C213D500B0AFA0 /* DetailHeaderTableViewCell.swift in Sources */,
@@ -528,7 +532,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -582,7 +586,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -607,6 +611,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -635,6 +640,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -41,6 +41,10 @@ class PokemonDetailViewController: UIViewController {
         title = "Pokemon Detail"
     }
     
+    func setupViewModel() {
+        
+    }
+    
     func setupTableView() {
         pokemonDetailTableView.delegate = self
         pokemonDetailTableView.dataSource = self
