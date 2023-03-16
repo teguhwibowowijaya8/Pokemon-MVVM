@@ -8,5 +8,5 @@
 import Foundation
 
 struct MovesModel: Decodable {
-    let move: MoveModel
+    var move: MoveModel
 }

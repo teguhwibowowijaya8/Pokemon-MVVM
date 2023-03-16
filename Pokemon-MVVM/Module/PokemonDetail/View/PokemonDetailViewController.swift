@@ -54,6 +54,7 @@ class PokemonDetailViewController: UIViewController {
     func setupTableView() {
         pokemonDetailTableView.delegate = self
         pokemonDetailTableView.dataSource = self
+        pokemonDetailTableView.separatorStyle = .none
         
         let detailHeaderCell = UINib(nibName: DetailHeaderTableViewCell.identifier, bundle: nil)
         pokemonDetailTableView.register(detailHeaderCell, forCellReuseIdentifier: DetailHeaderTableViewCell.identifier)
@@ -104,21 +105,11 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
             guard let moveCell = tableView.dequeueReusableCell(withIdentifier: DetailMoveTableViewCell.identifier, for: indexPath) as? DetailMoveTableViewCell
             else { return UITableViewCell() }
             
-            moveCell.delegate = self
             let move = pokemonDetail.moves[indexPath.row].move
-            moveCell.setupCell(moveName: move.name, moveUrlString: move.detailUrlString)
+            moveCell.setupCell(moveName: move.name, moveEffect: move.moveDetail?.effectString, moveAccuracy: move.moveDetail?.accuracy)
             
             return moveCell
             
         }
-    }
-}
-
-extension PokemonDetailViewController: DetailMoveCellDelegate {
-    func getMoveDetail(
-        with urlString: String,
-        onCompletion: @escaping (MoveDetailModel?) -> Void
-    ) {
-        self.pokemonDetailViewModel?.getMoveDetail(urlString: urlString, completion: onCompletion)
     }
 }

@@ -29,8 +29,22 @@ class PokemonDetailViewModel {
             switch response {
             case .success(let pokemonDetail):
                 self.pokemonDetail = pokemonDetail
-                self.delegate?.onPokemonDetailFetched(errorMessage: nil)
-                return
+                let group = DispatchGroup()
+                let moves = pokemonDetail.moves
+                
+                for (index, move) in moves.enumerated() {
+                    group.enter()
+                    self.getMoveDetail(urlString: move.move.detailUrlString) { moveDetail in
+                        self.pokemonDetail?.moves[index].move.moveDetail = moveDetail
+                        group.leave()
+                    }
+                }
+                
+                group.notify(queue: .main) {
+                    self.delegate?.onPokemonDetailFetched(errorMessage: nil)
+                    return
+                }
+                
                 
             case .failure(let error):
                 let errorMessage: String

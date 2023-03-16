@@ -7,45 +7,39 @@
 
 import UIKit
 
-protocol DetailMoveCellDelegate {
-    func getMoveDetail(
-        with urlString: String,
-        onCompletion: @escaping (MoveDetailModel?) -> Void
-    )
-}
-
 class DetailMoveTableViewCell: UITableViewCell {
     static let identifier = "DetailMoveTableViewCell"
     
-    @IBOutlet weak var pokemonMoveTextView: UITextView!
+    @IBOutlet weak var pokemonMoveTextView: UITextView! {
+        didSet {
+            pokemonMoveTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            pokemonMoveTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        }
+    }
     @IBOutlet weak var pokemonMoveEffectivenessLabel: UILabel!
-    @IBOutlet weak var pokemonMoveSeparatorView: UIView!
-    
-    var delegate: DetailMoveCellDelegate?
-    
+    @IBOutlet weak var pokemonMoveSeparatorView: UIView! {
+        didSet{
+            pokemonMoveSeparatorView.backgroundColor = .black
+        }
+    }
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    func setupCell(moveName: String, moveUrlString: String) {
-        delegate?.getMoveDetail(with: moveUrlString, onCompletion: { moveDetail in
-            let moveText: String
-            let moveEffectiveness: Int
-            
-            if let moveDetail = moveDetail {
-                moveText = "\(moveName)\n\n\(moveDetail.effectString)"
-                moveEffectiveness = moveDetail.accuracy ?? 0
-            } else {
-                moveText = moveName
-                moveEffectiveness = 0
-            }
-            
-            DispatchQueue.main.async {
-                self.pokemonMoveTextView.text = moveText
-                self.pokemonMoveEffectivenessLabel.text = "\(moveEffectiveness)"
-            }
-        })
+    func setupCell(moveName: String, moveEffect: String?, moveAccuracy: Int?) {
+        let move: String
+        let accuracy: Int
+        if let moveEffect = moveEffect {
+            move = "\(moveName)\n\n\(moveEffect)"
+            accuracy = moveAccuracy ?? 0
+        } else {
+            move = moveName
+            accuracy = 0
+        }
+        self.pokemonMoveTextView.text = move
+        self.pokemonMoveEffectivenessLabel.text = "\(accuracy)"
     }
     
 }

@@ -11,7 +11,7 @@ struct PokemonDetailModel: Decodable {
     let id: Int
     let name: String
     let sprites: SpritesModel
-    let moves: [MovesModel]
+    var moves: [MovesModel]
     let stats: [StatsModel]
     
     var health: Int {
