@@ -23,6 +23,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rB-hj-yBg">
                                 <rect key="frame" x="0.0" y="0.0" width="301" height="193.33333333333334"/>
                                 <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EGh-P3-8ey">
+                                        <rect key="frame" x="0.0" y="0.0" width="301" height="192.33333333333334"/>
+                                    </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKo-6I-P4j" userLabel="Separator View">
                                         <rect key="frame" x="0.0" y="192.33333333333334" width="301" height="1"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -30,9 +33,6 @@
                                             <constraint firstAttribute="height" constant="1" id="Iki-OK-4TK"/>
                                         </constraints>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EGh-P3-8ey">
-                                        <rect key="frame" x="0.0" y="0.0" width="301" height="192.33333333333334"/>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -45,8 +45,8 @@
                                     <constraint firstItem="EGh-P3-8ey" firstAttribute="top" secondItem="8rB-hj-yBg" secondAttribute="top" id="pbh-io-8Bt"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhp-1W-qBj">
-                                <rect key="frame" x="12" y="193.33333333333334" width="277" height="20.333333333333343"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhp-1W-qBj">
+                                <rect key="frame" x="12" y="203.33333333333334" width="277" height="20.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -56,7 +56,7 @@
                         <constraints>
                             <constraint firstItem="8rB-hj-yBg" firstAttribute="top" secondItem="Vos-az-5Xj" secondAttribute="top" id="PR3-DO-qYs"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="zhp-1W-qBj" secondAttribute="bottom" id="QM5-jb-b9M"/>
-                            <constraint firstItem="zhp-1W-qBj" firstAttribute="top" secondItem="8rB-hj-yBg" secondAttribute="bottom" id="U1P-Vg-N9P"/>
+                            <constraint firstItem="zhp-1W-qBj" firstAttribute="top" secondItem="8rB-hj-yBg" secondAttribute="bottom" constant="10" id="U1P-Vg-N9P"/>
                             <constraint firstAttribute="trailing" secondItem="zhp-1W-qBj" secondAttribute="trailing" constant="12" id="Xqn-os-Mnf"/>
                             <constraint firstItem="8rB-hj-yBg" firstAttribute="height" secondItem="Vos-az-5Xj" secondAttribute="height" multiplier="0.6" id="bbY-ri-rAd"/>
                             <constraint firstAttribute="trailing" secondItem="8rB-hj-yBg" secondAttribute="trailing" id="gyA-5z-uEO"/>
@@ -74,6 +74,12 @@
                 <constraint firstItem="Vos-az-5Xj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Tsf-U8-LGv"/>
             </constraints>
             <size key="customSize" width="301" height="322"/>
+            <connections>
+                <outlet property="pokemonCardView" destination="Vos-az-5Xj" id="8UX-JK-XXd"/>
+                <outlet property="pokemonImageSeparatorView" destination="rKo-6I-P4j" id="uFH-Lu-J4Z"/>
+                <outlet property="pokemonImageView" destination="EGh-P3-8ey" id="ZBH-Rn-7we"/>
+                <outlet property="pokemonNameLabel" destination="zhp-1W-qBj" id="b5Z-Ij-Woi"/>
+            </connections>
             <point key="canvasLocation" x="115.26717557251908" y="115.49295774647888"/>
         </collectionViewCell>
     </objects>

@@ -48,6 +48,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Kog-U3-fxS"/>
+                    <connections>
+                        <outlet property="pokemonListCollectionView" destination="kfn-p3-QDW" id="EjH-VB-HhO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -75,6 +78,9 @@
                             <constraint firstItem="xa9-Ef-Iuo" firstAttribute="bottom" secondItem="c8Z-bQ-gvj" secondAttribute="bottom" id="xJg-JV-Spa"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="pokemonDetailTableView" destination="c8Z-bQ-gvj" id="aYn-XL-9nr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="StO-J2-Fq0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

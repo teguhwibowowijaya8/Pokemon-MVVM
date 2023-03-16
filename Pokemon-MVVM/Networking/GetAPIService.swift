@@ -7,22 +7,22 @@
 
 import Foundation
 
-enum GetAPIServiceError: Error {
+enum GetAPIError: Error {
     case invalidUrl
     case fetchError(errorMessage: String)
     case parseError
     case noData
 }
 
-protocol GetAPIServiceProtocol {
-    mutating func set(url: URL?)
+protocol GetAPIProtocol {
+    mutating func set(url: String)
     func callGetAPI<T: Decodable>(
         model: T.Type,
-        onCompletion: @escaping (Result<T, GetAPIServiceError>) -> Void
+        onCompletion: @escaping (Result<T, GetAPIError>) -> Void
     )
 }
 
-struct GetAPIService: GetAPIServiceProtocol {
+struct GetAPIService: GetAPIProtocol {
     private var url: URL?
     private let fetchDataService: FetchDataService
     private let parseDataService: ParseDataService
@@ -32,13 +32,13 @@ struct GetAPIService: GetAPIServiceProtocol {
         fetchDataService = FetchDataService()
     }
     
-    mutating func set(url: URL?) {
-        self.url = url
+    mutating func set(url: String) {
+        self.url = URL(string: url)
     }
     
     func callGetAPI<T>(
         model: T.Type,
-        onCompletion: @escaping (Result<T, GetAPIServiceError>) -> Void)
+        onCompletion: @escaping (Result<T, GetAPIError>) -> Void)
     where T : Decodable {
         
         guard let url = url

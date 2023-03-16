@@ -72,6 +72,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="pokemonHealthLabel" destination="7M1-Ey-BPe" id="3Ha-tt-e7r"/>
+                <outlet property="pokemonImageContainerView" destination="nLD-lZ-qEA" id="w9B-YQ-jbR"/>
+                <outlet property="pokemonImageView" destination="spl-ey-f42" id="lCc-xq-FLf"/>
+                <outlet property="pokemonNameLabel" destination="u8R-pf-XOl" id="ozO-Mu-MrV"/>
+            </connections>
             <point key="canvasLocation" x="-54.198473282442748" y="101.05633802816902"/>
         </tableViewCell>
     </objects>

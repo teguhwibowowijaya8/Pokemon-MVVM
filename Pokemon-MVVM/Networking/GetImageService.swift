@@ -7,27 +7,27 @@
 
 import UIKit
 
-enum GetImageServiceError: Error {
+enum GetImageError: Error {
     case invalidUrl
     case fetchError(errorMessage: String)
     case noData
 }
 
-protocol GetImageServiceProtocol {
+protocol GetImageProtocol {
     func getImage(
         from url: URL?,
-        onCompletion: @escaping (Result<UIImage?, GetImageServiceError>) -> Void
+        onCompletion: @escaping (Result<UIImage?, GetImageError>) -> Void
     )
 }
 
-struct GetImageService: GetImageServiceProtocol {
+struct GetImageService: GetImageProtocol {
     private let fetchDataService: FetchDataService
     
     init() {
         fetchDataService = FetchDataService()
     }
     
-    func getImage(from url: URL?, onCompletion: @escaping (Result<UIImage?, GetImageServiceError>) -> Void) {
+    func getImage(from url: URL?, onCompletion: @escaping (Result<UIImage?, GetImageError>) -> Void) {
         guard let url = url
         else { return onCompletion(.failure(.invalidUrl)) }
         

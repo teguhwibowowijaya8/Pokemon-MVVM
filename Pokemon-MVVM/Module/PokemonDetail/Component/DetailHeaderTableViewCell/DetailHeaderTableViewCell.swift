@@ -8,16 +8,17 @@
 import UIKit
 
 class DetailHeaderTableViewCell: UITableViewCell {
+    static let identifier = "DetailHeaderTableViewCell"
+    
+    @IBOutlet weak var pokemonNameLabel: UILabel!
+    @IBOutlet weak var pokemonHealthLabel: UILabel!
+    @IBOutlet weak var pokemonImageContainerView: UIView!
+    @IBOutlet weak var pokemonImageView: UIImageView!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
 }

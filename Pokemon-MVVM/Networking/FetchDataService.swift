@@ -7,22 +7,22 @@
 
 import Foundation
 
-enum FetchDataServiceError: Error {
+enum FetchDataError: Error {
     case fetchError(errorMessage: String)
     case noData
 }
 
-protocol FetchDataServiceProtocol {
+protocol FetchDataProtocol {
     func fetch(
         url: URL,
-        onCompletion: @escaping (Result<Data, FetchDataServiceError>) -> Void
+        onCompletion: @escaping (Result<Data, FetchDataError>) -> Void
     )
 }
 
-struct FetchDataService: FetchDataServiceProtocol {
+struct FetchDataService: FetchDataProtocol {
     func fetch(
         url: URL,
-        onCompletion: @escaping (Result<Data, FetchDataServiceError>) -> Void
+        onCompletion: @escaping (Result<Data, FetchDataError>) -> Void
     ){
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
@@ -36,6 +36,6 @@ struct FetchDataService: FetchDataServiceProtocol {
             }
             
             return onCompletion(.failure(.noData))
-        }
+        }.resume()
     }
 }

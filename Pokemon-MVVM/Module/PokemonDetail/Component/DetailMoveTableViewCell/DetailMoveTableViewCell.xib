@@ -67,6 +67,11 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="pokemonMoveEffectivenessLabel" destination="Aen-PP-7eh" id="41F-Ob-KwK"/>
+                <outlet property="pokemonMoveSeparatorView" destination="weZ-2P-bcj" id="WYf-oY-tad"/>
+                <outlet property="pokemonMoveTextView" destination="j3A-nr-1Qt" id="aqn-0p-nYe"/>
+            </connections>
             <point key="canvasLocation" x="-56.488549618320612" y="67.605633802816911"/>
         </tableViewCell>
     </objects>

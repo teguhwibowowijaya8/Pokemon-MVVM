@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol ParseDataServiceProtocol {
+protocol ParseDataProtocol {
     func parse<T: Decodable>(data: Data, to model: T.Type) -> T?
 }
 
-struct ParseDataService: ParseDataServiceProtocol {
+struct ParseDataService: ParseDataProtocol {
     func parse<T>(data: Data, to model: T.Type) -> T? where T : Decodable {
         do {
             let decoder = JSONDecoder()

@@ -8,16 +8,16 @@
 import UIKit
 
 class DetailMoveTableViewCell: UITableViewCell {
-
+    static let identifier = "DetailMoveTableViewCell"
+    
+    @IBOutlet weak var pokemonMoveTextView: UITextView!
+    @IBOutlet weak var pokemonMoveEffectivenessLabel: UILabel!
+    @IBOutlet weak var pokemonMoveSeparatorView: UIView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
 }
