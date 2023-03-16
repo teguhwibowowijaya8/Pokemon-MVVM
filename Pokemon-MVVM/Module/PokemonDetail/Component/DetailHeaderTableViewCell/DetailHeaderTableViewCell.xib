@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -9,27 +10,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="275" id="KGk-i7-Jjw" customClass="DetailHeaderTableViewCell" customModule="Pokemon_MVVM" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="349" height="275"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="338" id="KGk-i7-Jjw" customClass="DetailHeaderTableViewCell" customModule="Pokemon_MVVM" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="391" height="338"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="349" height="275"/>
+                <rect key="frame" x="0.0" y="0.0" width="391" height="338"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nld-vF-KnB">
-                        <rect key="frame" x="20" y="10" width="309" height="255"/>
+                        <rect key="frame" x="20" y="10" width="351" height="318"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="bg8-h8-OWD">
-                                <rect key="frame" x="5" y="0.0" width="299" height="20.333333333333332"/>
+                                <rect key="frame" x="5" y="0.0" width="341" height="20.333333333333332"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8R-pf-XOl">
-                                        <rect key="frame" x="0.0" y="0.0" width="239.66666666666666" height="20.333333333333332"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="281.66666666666669" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7M1-Ey-BPe">
-                                        <rect key="frame" x="257.66666666666669" y="0.0" width="41.333333333333314" height="20.333333333333332"/>
+                                        <rect key="frame" x="299.66666666666669" y="0.0" width="41.333333333333314" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -37,14 +38,15 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLD-lZ-qEA">
-                                <rect key="frame" x="0.0" y="30.333333333333329" width="309" height="224.66666666666669"/>
+                                <rect key="frame" x="0.0" y="30.333333333333343" width="351" height="200"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="spl-ey-f42">
-                                        <rect key="frame" x="0.0" y="0.0" width="309" height="224.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="351" height="200"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="HOQ-J3-pow"/>
                                     <constraint firstAttribute="bottom" secondItem="spl-ey-f42" secondAttribute="bottom" id="hCu-hf-qGu"/>
                                     <constraint firstAttribute="trailing" secondItem="spl-ey-f42" secondAttribute="trailing" id="jWX-gO-2SV"/>
                                     <constraint firstItem="spl-ey-f42" firstAttribute="top" secondItem="nLD-lZ-qEA" secondAttribute="top" id="tIm-mI-qFM"/>
@@ -56,7 +58,7 @@
                         <constraints>
                             <constraint firstItem="nLD-lZ-qEA" firstAttribute="top" secondItem="bg8-h8-OWD" secondAttribute="bottom" constant="10" id="5tJ-bT-9Ic"/>
                             <constraint firstItem="nLD-lZ-qEA" firstAttribute="leading" secondItem="Nld-vF-KnB" secondAttribute="leading" id="71Y-ft-PXA"/>
-                            <constraint firstAttribute="bottom" secondItem="nLD-lZ-qEA" secondAttribute="bottom" id="ANp-Wr-24q"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nLD-lZ-qEA" secondAttribute="bottom" id="ANp-Wr-24q"/>
                             <constraint firstAttribute="trailing" secondItem="nLD-lZ-qEA" secondAttribute="trailing" id="BOA-qv-aWe"/>
                             <constraint firstItem="bg8-h8-OWD" firstAttribute="top" secondItem="Nld-vF-KnB" secondAttribute="top" id="GId-Al-Fhu"/>
                             <constraint firstItem="bg8-h8-OWD" firstAttribute="leading" secondItem="Nld-vF-KnB" secondAttribute="leading" constant="5" id="HBR-Gu-pqc"/>
@@ -78,7 +80,7 @@
                 <outlet property="pokemonImageView" destination="spl-ey-f42" id="lCc-xq-FLf"/>
                 <outlet property="pokemonNameLabel" destination="u8R-pf-XOl" id="ozO-Mu-MrV"/>
             </connections>
-            <point key="canvasLocation" x="-54.198473282442748" y="101.05633802816902"/>
+            <point key="canvasLocation" x="-22.137404580152669" y="123.23943661971832"/>
         </tableViewCell>
     </objects>
 </document>

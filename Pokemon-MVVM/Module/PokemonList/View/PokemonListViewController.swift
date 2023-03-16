@@ -89,7 +89,10 @@ extension PokemonListViewController: UICollectionViewDelegateFlowLayout, UIColle
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let pokemonDetailVC = storyboard.instantiateViewController(withIdentifier: PokemonDetailViewController.identifier) as? PokemonDetailViewController {
+        if let pokemon = self.pokemonListViewModel?.pokemons?.result[indexPath.row],
+            let pokemonDetailVC = storyboard.instantiateViewController(withIdentifier: PokemonDetailViewController.identifier) as? PokemonDetailViewController {
+
+            pokemonDetailVC.detailUrl = pokemon.url
             self.navigationController?.pushViewController(pokemonDetailVC, animated: true)
         }
     }

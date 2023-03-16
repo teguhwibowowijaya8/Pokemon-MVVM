@@ -28,11 +28,15 @@ class PokemonDetailViewController: UIViewController {
     static let identifier = "PokemonDetailViewController"
     
     @IBOutlet weak var pokemonDetailTableView: UITableView!
+    
+    var detailUrl: String?
+    private var pokemonDetailViewModel: PokemonDetailViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        setupViewModel()
         setupTableView()
     }
     
@@ -42,7 +46,9 @@ class PokemonDetailViewController: UIViewController {
     }
     
     func setupViewModel() {
-        
+        guard let detailUrl = detailUrl else { return }
+        pokemonDetailViewModel = PokemonDetailViewModel(url: detailUrl)
+        pokemonDetailViewModel?.getDetail()
     }
     
     func setupTableView() {
@@ -57,12 +63,62 @@ class PokemonDetailViewController: UIViewController {
     }
 }
 
+extension PokemonDetailViewController: PokemonDetailProtocol {
+    func onPokemonDetailFetched(errorMessage: String?) {
+        DispatchQueue.main.async {
+            self.pokemonDetailTableView.reloadData()
+        }
+    }
+}
+
 extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        switch PokemonDetailSection(section) {
+        case .header:
+            return 1
+        case .moves:
+            return pokemonDetailViewModel?.pokemonDetail?.moves.count ?? 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let pokemonDetail = pokemonDetailViewModel?.pokemonDetail
+        else { return UITableViewCell() }
+        switch PokemonDetailSection(indexPath.section) {
+        case .header:
+            guard let headerCell = tableView.dequeueReusableCell(withIdentifier: DetailHeaderTableViewCell.identifier, for: indexPath) as? DetailHeaderTableViewCell
+            else { return UITableViewCell() }
+            
+            headerCell.setupCell(
+                name: pokemonDetail.name,
+                health: pokemonDetail.health,
+                imageUrlString: pokemonDetail.sprites.imageUrlString)
+            
+            return headerCell
+            
+        case .moves:
+            guard let moveCell = tableView.dequeueReusableCell(withIdentifier: DetailMoveTableViewCell.identifier, for: indexPath) as? DetailMoveTableViewCell
+            else { return UITableViewCell() }
+            
+            moveCell.delegate = self
+            let move = pokemonDetail.moves[indexPath.row].move
+            moveCell.setupCell(moveName: move.name, moveUrlString: move.detailUrlString)
+            
+            return moveCell
+            
+        }
+    }
+}
+
+extension PokemonDetailViewController: DetailMoveCellDelegate {
+    func getMoveDetail(
+        with urlString: String,
+        onCompletion: @escaping (MoveDetailModel?) -> Void
+    ) {
+        self.pokemonDetailViewModel?.getMoveDetail(urlString: urlString, completion: onCompletion)
     }
 }

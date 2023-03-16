@@ -12,5 +12,15 @@ struct PokemonDetailModel: Decodable {
     let name: String
     let sprites: SpritesModel
     let moves: [MovesModel]
-    let stat: [StatsModel]
+    let stats: [StatsModel]
+    
+    var health: Int {
+        for stat in stats {
+            if stat.stat.name == "hp" {
+                return stat.baseStat
+            }
+        }
+        
+        return 0
+    }
 }

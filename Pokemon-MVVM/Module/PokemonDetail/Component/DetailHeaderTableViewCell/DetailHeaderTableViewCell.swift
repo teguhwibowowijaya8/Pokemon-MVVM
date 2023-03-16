@@ -13,12 +13,24 @@ class DetailHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var pokemonNameLabel: UILabel!
     @IBOutlet weak var pokemonHealthLabel: UILabel!
     @IBOutlet weak var pokemonImageContainerView: UIView!
-    @IBOutlet weak var pokemonImageView: UIImageView!
+    @IBOutlet weak var pokemonImageView: UIImageView! {
+        didSet {
+            pokemonImageView.contentMode = .scaleAspectFill
+        }
+    }
+    
+    private let defaultImage = UIImage(systemName: "star")
     
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    func setupCell(name: String, health: Int, imageUrlString: String?) {
+        pokemonImageView.loadImage(from: imageUrlString, withPlaceholder: defaultImage)
+        pokemonNameLabel.text = name
+        pokemonHealthLabel.text = "\(health) HP"
     }
     
 }
