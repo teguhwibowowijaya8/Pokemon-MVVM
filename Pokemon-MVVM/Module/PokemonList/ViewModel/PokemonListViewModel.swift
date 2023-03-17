@@ -12,7 +12,7 @@ protocol PokemonListViewModelDelegate {
 }
 
 class PokemonListViewModel {
-    var pokemons: Pokemons?
+    var pokemons: PokemonsModel?
     
     private var getPokemonListService: GetPokemonListService
     private var getPokemonListImageService: GetPokemonListImageService

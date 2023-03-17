@@ -10,14 +10,14 @@ import Foundation
 protocol GetPokemonListProtocol {
     mutating func getPokemonList(
         url: String,
-        onCompletion: @escaping (Pokemons?, String?) -> Void
+        onCompletion: @escaping (PokemonsModel?, String?) -> Void
     )
 }
 
 class GetPokemonListService {
     private var getAPIService: GetAPIService
     private var getPokemonListImageService: GetPokemonListImageService?
-    var pokemons: Pokemons?
+    var pokemons: PokemonsModel?
     
     init(getAPIService: GetAPIService = GetAPIService()) {
         self.getAPIService = getAPIService
@@ -26,10 +26,10 @@ class GetPokemonListService {
     
     func getPokemonList(
         url: String,
-        onCompletion: @escaping (Pokemons?, String?) -> Void
+        onCompletion: @escaping (PokemonsModel?, String?) -> Void
     ) {
         getAPIService.set(url: url)
-        getAPIService.callGetAPI(model: Pokemons.self) { response in
+        getAPIService.callGetAPI(model: PokemonsModel.self) { response in
             switch response {
             case .success(let pokemonsData):
                 self.pokemons = pokemonsData

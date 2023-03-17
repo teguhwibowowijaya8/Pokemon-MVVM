@@ -12,10 +12,6 @@ struct PokemonModel: Decodable {
     let url: String
     var image: PokemonDetailImageModel?
     
-    var urlLink: URL? {
-        return URL(string: url)
-    }
-    
     enum CodingKeys: CodingKey {
         case name
         case url

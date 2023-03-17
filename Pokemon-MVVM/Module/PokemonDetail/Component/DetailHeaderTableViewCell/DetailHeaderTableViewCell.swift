@@ -25,7 +25,7 @@ class DetailHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var pokemonImageContainerView: UIView!
     @IBOutlet weak var pokemonImageView: UIImageView! {
         didSet {
-            pokemonImageView.contentMode = .scaleAspectFill
+            pokemonImageView.contentMode = .scaleAspectFit
         }
     }
     

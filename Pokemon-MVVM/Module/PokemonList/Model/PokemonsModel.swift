@@ -7,21 +7,11 @@
 
 import Foundation
 
-struct Pokemons: Decodable {
+struct PokemonsModel: Decodable {
     let count: Int
     let next: String?
     let previous: String?
     var result: [PokemonModel]
-    
-    var nextURL: URL? {
-        guard let next = next else {return nil}
-        return URL(string: next)
-    }
-    
-    var previousURL: URL? {
-        guard let previous = previous else {return nil}
-        return URL(string: previous)
-    }
     
     enum CodingKeys: String, CodingKey {
         case count

@@ -12,10 +12,6 @@ struct MoveModel: Decodable {
     let detailUrlString: String
     var moveDetail: MoveDetailModel?
     
-    var detailUrl: URL? {
-        return URL(string: detailUrlString)
-    }
-    
     enum CodingKeys: String, CodingKey {
         case name
         case detailUrlString = "url"
