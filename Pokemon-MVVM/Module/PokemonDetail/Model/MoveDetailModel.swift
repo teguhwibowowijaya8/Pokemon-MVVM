@@ -31,9 +31,8 @@ struct MoveDetailModel: Decodable {
         }
         
         if let effectEntriesEn = effectEntriesEn {
-            return effectEntriesEn.effect
-        } else if effectEntries[0].effect != "" {
-            return effectEntries[0].effect
+            let effectString = effectEntriesEn.effect != nil ? effectEntriesEn.effect : effectEntriesEn.shortEffect
+            return effectString
         } else {
             return nil
         }

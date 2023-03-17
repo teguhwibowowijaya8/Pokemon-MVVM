@@ -8,9 +8,9 @@
 import Foundation
 
 struct EffectModel: Decodable {
-    let effect: String
+    let effect: String?
     let effectLanguage: EffectLanguage
-    let shortEffect: String
+    let shortEffect: String?
     
     enum CodingKeys: String, CodingKey {
         case effect
