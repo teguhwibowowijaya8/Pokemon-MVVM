@@ -39,7 +39,7 @@ class DetailHeaderTableViewCell: UITableViewCell {
     
     func setupCell(name: String, health: Int, imageUrlString: String?) {
         pokemonImageView.loadImage(from: imageUrlString, withPlaceholder: defaultImage)
-        pokemonNameLabel.text = name
+        pokemonNameLabel.text = name.capitalized(with: .current)
         pokemonHealthLabel.text = "\(health) HP"
     }
     

@@ -37,7 +37,7 @@ class DetailMoveTableViewCell: UITableViewCell {
     }
     
     func setupCell(moveName: String, moveDetail: MoveDetailModel?) {
-        var move = setupMoveName(moveName)
+        let move = setupMoveName(moveName.capitalized(with: .current))
         var moveEffectiveness: String = "0"
         
         if let moveDetail = moveDetail {
@@ -70,7 +70,7 @@ class DetailMoveTableViewCell: UITableViewCell {
         let movePower = (power != nil) ? "\(power!) power" : movePp
         let moveEffectiveness = (accuracy != nil) ? "\(accuracy!) accuracy" : movePower
         
-        return moveEffectiveness
+        return moveEffectiveness.capitalized(with: .current)
     }
     
 }

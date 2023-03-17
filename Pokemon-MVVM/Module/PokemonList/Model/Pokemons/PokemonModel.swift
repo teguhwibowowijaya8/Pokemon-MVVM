@@ -23,11 +23,7 @@ struct PokemonModel: Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        var name = try container.decode(String.self, forKey: .name)
-        name.capitalizeFirstLetter()
-        self.name = name
-        
+        self.name = try container.decode(String.self, forKey: .name)
         self.url = try container.decode(String.self, forKey: .url)
     }
     

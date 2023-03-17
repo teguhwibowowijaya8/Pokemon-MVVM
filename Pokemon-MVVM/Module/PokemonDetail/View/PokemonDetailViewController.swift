@@ -68,7 +68,6 @@ class PokemonDetailViewController: UIViewController {
 extension PokemonDetailViewController: PokemonDetailProtocol {
     func onPokemonDetailFetched(errorMessage: String?) {
         DispatchQueue.main.async {
-            print(self.pokemonDetailViewModel?.pokemonDetail)
             self.pokemonDetailTableView.reloadData()
         }
     }

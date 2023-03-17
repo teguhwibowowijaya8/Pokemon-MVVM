@@ -49,7 +49,7 @@ class PokemonCollectionViewCell: UICollectionViewCell {
     func setupCell(with pokemon: PokemonModel) {
         self.pokemonImageView.loadImage(from: pokemon.image?.sprites.imageUrlString, withPlaceholder: self.defaultImage)
         
-        pokemonNameLabel.text = pokemon.name
+        pokemonNameLabel.text = pokemon.name.capitalized(with: .current)
     }
     
 }
