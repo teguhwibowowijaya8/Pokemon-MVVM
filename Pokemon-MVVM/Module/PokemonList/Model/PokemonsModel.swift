@@ -9,8 +9,8 @@ import Foundation
 
 struct PokemonsModel: Decodable {
     let count: Int
-    let next: String?
-    let previous: String?
+    var next: String?
+    var previous: String?
     var result: [PokemonModel]
     
     enum CodingKeys: String, CodingKey {

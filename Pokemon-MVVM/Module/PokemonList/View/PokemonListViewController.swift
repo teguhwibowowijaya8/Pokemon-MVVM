@@ -7,12 +7,16 @@
 
 import UIKit
 
+enum PokemonListSection: Int {
+    case pokemonList
+    case loader
+}
+
 class PokemonListViewController: UIViewController {
     
     @IBOutlet weak var pokemonListCollectionView: UICollectionView!
     
-    private let horizontalSpacing: CGFloat = 20
-    private let verticalSpacing: CGFloat = 10
+    private let spacing: CGFloat = 20
     
     private var pokemonListViewModel: PokemonListViewModel?
     
@@ -48,12 +52,17 @@ class PokemonListViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         
-        let viewWidth = self.view.bounds.width - horizontalSpacing * 3
-        flowLayout.itemSize = CGSize(width: viewWidth / 2, height: 220)
+        let viewWidth = self.view.bounds.width - spacing * 3
         
-        flowLayout.sectionInset = UIEdgeInsets(top: verticalSpacing, left: horizontalSpacing, bottom: verticalSpacing, right: horizontalSpacing)
-        flowLayout.minimumInteritemSpacing = horizontalSpacing
-        flowLayout.minimumLineSpacing = verticalSpacing
+        let itemWidth: CGFloat
+        if viewWidth / 2 > 200 { itemWidth = 200 }
+        else { itemWidth = viewWidth / 2 }
+        
+        flowLayout.itemSize = CGSize(width: itemWidth, height: 220)
+        
+        flowLayout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        flowLayout.minimumInteritemSpacing = spacing
+        flowLayout.minimumLineSpacing = spacing
         
         return flowLayout
     }
@@ -73,11 +82,21 @@ extension PokemonListViewController: PokemonListViewModelDelegate {
 
 extension PokemonListViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pokemonListViewModel?.pokemons?.result.count ?? 0
+        switch PokemonListSection(rawValue: section) {
+        case .pokemonList:
+            return pokemonListViewModel?.currentCount ?? 0
+            
+        case .loader:
+            let isLoading = pokemonListViewModel?.isLoading ?? false
+            return isLoading ? 1 : 0
+            
+        case .none:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let pokemon = pokemonListViewModel?.pokemons?.result[indexPath.row],
+        guard let pokemon: PokemonModel = pokemonListViewModel?.pokemons?.result[indexPath.row],
               let pokemonCell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonCollectionViewCell.identifier, for: indexPath) as? PokemonCollectionViewCell
         else { return UICollectionViewCell() }
         
@@ -88,11 +107,20 @@ extension PokemonListViewController: UICollectionViewDelegateFlowLayout, UIColle
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let pokemon = self.pokemonListViewModel?.pokemons?.result[indexPath.row],
+        if let pokemon: PokemonModel = self.pokemonListViewModel?.pokemons?.result[indexPath.row],
             let pokemonDetailVC = storyboard.instantiateViewController(withIdentifier: PokemonDetailViewController.identifier) as? PokemonDetailViewController {
 
             pokemonDetailVC.detailUrl = pokemon.url
             self.navigationController?.pushViewController(pokemonDetailVC, animated: true)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let currCount = pokemonListViewModel?.currentCount,
+              currCount > 0
+        else { return }
+        if indexPath.row == currCount - 1 {
+            pokemonListViewModel?.getPokemonList()
         }
     }
 }
