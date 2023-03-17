@@ -20,7 +20,7 @@ struct MoveDetailModel: Decodable {
         case effectEntries = "effect_entries"
     }
     
-    var effectString: String {
+    var effectString: String? {
         var effectEntriesEn: EffectModel?
         
         for entry in effectEntries {
@@ -35,7 +35,7 @@ struct MoveDetailModel: Decodable {
         } else if effectEntries[0].effect != "" {
             return effectEntries[0].effect
         } else {
-            return "No Move Description"
+            return nil
         }
     }
 }

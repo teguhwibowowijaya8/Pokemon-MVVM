@@ -10,8 +10,18 @@ import UIKit
 class DetailHeaderTableViewCell: UITableViewCell {
     static let identifier = "DetailHeaderTableViewCell"
     
-    @IBOutlet weak var pokemonNameLabel: UILabel!
-    @IBOutlet weak var pokemonHealthLabel: UILabel!
+    @IBOutlet weak var pokemonNameLabel: UILabel! {
+        didSet {
+            pokemonNameLabel.font = .boldSystemFont(ofSize: 24)
+        }
+    }
+    
+    @IBOutlet weak var pokemonHealthLabel: UILabel!{
+        didSet {
+            pokemonHealthLabel.font = .boldSystemFont(ofSize: 20)
+        }
+    }
+    
     @IBOutlet weak var pokemonImageContainerView: UIView!
     @IBOutlet weak var pokemonImageView: UIImageView! {
         didSet {

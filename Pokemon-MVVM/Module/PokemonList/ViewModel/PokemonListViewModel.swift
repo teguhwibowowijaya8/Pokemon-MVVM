@@ -31,6 +31,7 @@ class PokemonListViewModel {
             case .success(let pokemons):
                 self.pokemons = pokemons
                 self.delegate?.onPokemonListFetched(errorMessage: nil)
+                return
                 
             case .failure(let error):
                 let errorMessage: String
@@ -46,6 +47,7 @@ class PokemonListViewModel {
                 }
                 
                 self.delegate?.onPokemonListFetched(errorMessage: errorMessage)
+                return
             }
         }
     }

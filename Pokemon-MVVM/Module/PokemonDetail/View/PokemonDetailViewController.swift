@@ -48,6 +48,7 @@ class PokemonDetailViewController: UIViewController {
     func setupViewModel() {
         guard let detailUrl = detailUrl else { return }
         pokemonDetailViewModel = PokemonDetailViewModel(url: detailUrl)
+        pokemonDetailViewModel?.delegate = self
         pokemonDetailViewModel?.getDetail()
     }
     
@@ -67,6 +68,7 @@ class PokemonDetailViewController: UIViewController {
 extension PokemonDetailViewController: PokemonDetailProtocol {
     func onPokemonDetailFetched(errorMessage: String?) {
         DispatchQueue.main.async {
+            print(self.pokemonDetailViewModel?.pokemonDetail)
             self.pokemonDetailTableView.reloadData()
         }
     }
@@ -106,7 +108,8 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
             else { return UITableViewCell() }
             
             let move = pokemonDetail.moves[indexPath.row].move
-            moveCell.setupCell(moveName: move.name, moveEffect: move.moveDetail?.effectString, moveAccuracy: move.moveDetail?.accuracy)
+            moveCell.setupCell(
+                moveName: move.name, moveDetail: move.moveDetail)
             
             return moveCell
             

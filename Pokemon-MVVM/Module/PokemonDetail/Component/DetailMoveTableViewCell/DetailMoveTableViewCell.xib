@@ -25,19 +25,22 @@
                                 <rect key="frame" x="0.0" y="8" width="344" height="33"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="text" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3A-nr-1Qt">
-                                        <rect key="frame" x="0.0" y="0.0" width="292.66666666666669" height="33"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="250.66666666666666" height="33"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aen-PP-7eh">
-                                        <rect key="frame" x="302.66666666666669" y="0.0" width="41.333333333333314" height="20.333333333333332"/>
+                                        <rect key="frame" x="260.66666666666669" y="0.0" width="83.333333333333314" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="j3A-nr-1Qt" firstAttribute="width" secondItem="Aen-PP-7eh" secondAttribute="width" multiplier="7.5:2.5" id="bTz-KP-Jhq"/>
+                                </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="weZ-2P-bcj" userLabel="Separator View">
                                 <rect key="frame" x="0.0" y="49" width="344" height="3"/>

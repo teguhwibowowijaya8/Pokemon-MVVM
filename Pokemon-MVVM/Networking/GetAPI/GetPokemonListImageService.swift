@@ -7,7 +7,14 @@
 
 import Foundation
 
-struct GetPokemonListImageService {
+protocol GetPokemonListImageProtocol {
+    mutating func getPokemonDetailImage(
+        from url: String,
+        onCompletion: @escaping (Result<PokemonDetailImageModel, GetAPIError>) -> Void
+    )
+}
+
+struct GetPokemonListImageService: GetPokemonListImageProtocol {
     private var getAPIService: GetAPIService
     
     init() {
