@@ -10,7 +10,7 @@ import Foundation
 protocol GetPokemonListImageProtocol {
     mutating func getPokemonDetailImage(
         from url: String,
-        onCompletion: @escaping (Result<PokemonDetailImageModel, GetAPIError>) -> Void
+        onCompletion: @escaping (PokemonDetailImageModel?) -> Void
     )
 }
 
@@ -23,16 +23,17 @@ struct GetPokemonListImageService: GetPokemonListImageProtocol {
     
     mutating func getPokemonDetailImage(
         from url: String,
-        onCompletion: @escaping (Result<PokemonDetailImageModel, GetAPIError>) -> Void
+        onCompletion: @escaping (PokemonDetailImageModel?) -> Void
     ) {
         getAPIService.set(url: url)
         getAPIService.callGetAPI(model: PokemonDetailImageModel.self) { response in
             switch response {
             case .success(let detailImage):
-                return onCompletion(.success(detailImage))
+                return onCompletion(detailImage)
                 
             case .failure(let error):
-                return onCompletion(.failure(error))
+                print(error)
+                return onCompletion(nil)
             }
         }
     }

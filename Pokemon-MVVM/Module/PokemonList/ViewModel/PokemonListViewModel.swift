@@ -26,46 +26,13 @@ class PokemonListViewModel {
     }
     
     func getPokemonList() {
-        getPokemonListService.getPokemonList(url: urlString) { response in
-            switch response {
-            case .success(let pokemons):
-                self.pokemons = pokemons
+        getPokemonListService.getPokemonList(url: urlString) { pokemonsData, errorMessage in
+            if let pokemonsData = pokemonsData {
+                self.pokemons = pokemonsData
                 self.delegate?.onPokemonListFetched(errorMessage: nil)
-                return
-                
-            case .failure(let error):
-                let errorMessage: String
-                switch error {
-                case .parseError:
-                    errorMessage = "Parse Error"
-                case .invalidUrl:
-                    errorMessage = "Invalid URL"
-                case .fetchError(let fetchError):
-                    errorMessage = fetchError
-                case .noData:
-                    errorMessage = "No Data"
-                }
-                
+            } else {
                 self.delegate?.onPokemonListFetched(errorMessage: errorMessage)
-                return
             }
         }
     }
-    
-    func getPokemonDetailImage(
-        of detailUrl: String,
-        onCompletion: @escaping (String?) -> Void
-    ) {
-        getPokemonListImageService.getPokemonDetailImage(from: detailUrl) { response in
-            switch response {
-            case .success(let image):
-                onCompletion(image.sprites.imageUrlString)
-                
-            case .failure(let error):
-                print(error)
-                onCompletion(nil)
-            }
-        }
-    }
-    
 }

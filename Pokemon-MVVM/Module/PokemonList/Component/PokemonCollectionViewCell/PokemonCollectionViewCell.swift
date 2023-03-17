@@ -7,13 +7,6 @@
 
 import UIKit
 
-protocol PokemonCollectionCellDelegate {
-    func getImageURL(
-        of detailUrl: String,
-        onCompletion: @escaping (String?) -> Void
-    )
-}
-
 class PokemonCollectionViewCell: UICollectionViewCell {
     static let identifier = "PokemonCollectionViewCell"
     
@@ -48,23 +41,15 @@ class PokemonCollectionViewCell: UICollectionViewCell {
     private let defaultImage: UIImage? = UIImage(systemName: "star")
     private var getPokemonListImageService: GetPokemonListImageService?
     
-    var delegate: PokemonCollectionCellDelegate?
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
     func setupCell(with pokemon: PokemonModel) {
-        setupImages(pokemonUrlString: pokemon.url)
+        self.pokemonImageView.loadImage(from: pokemon.image?.sprites.imageUrlString, withPlaceholder: self.defaultImage)
+        
         pokemonNameLabel.text = pokemon.name
-    }
-    
-    func setupImages(pokemonUrlString: String) {
-        delegate?.getImageURL(of: pokemonUrlString, onCompletion: { pokemonImageUrl in
-            self.pokemonImageView.loadImage(from: pokemonImageUrl, withPlaceholder: self.defaultImage)
-        })
     }
     
 }

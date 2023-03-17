@@ -10,31 +10,45 @@ import Foundation
 protocol GetPokemonListProtocol {
     mutating func getPokemonList(
         url: String,
-        onCompletion: @escaping (Result<Pokemons, GetAPIError>) -> Void
+        onCompletion: @escaping (Pokemons?, String?) -> Void
     )
 }
 
-struct GetPokemonListService {
+class GetPokemonListService {
     private var getAPIService: GetAPIService
-    private var getPokemonListImageService: GetPokemonListImageService
+    private var getPokemonListImageService: GetPokemonListImageService?
+    var pokemons: Pokemons?
     
-    init() {
-        self.getAPIService = GetAPIService()
+    init(getAPIService: GetAPIService = GetAPIService()) {
+        self.getAPIService = getAPIService
         self.getPokemonListImageService = GetPokemonListImageService()
     }
     
-    mutating func getPokemonList(
+    func getPokemonList(
         url: String,
-        onCompletion: @escaping (Result<Pokemons, GetAPIError>) -> Void
+        onCompletion: @escaping (Pokemons?, String?) -> Void
     ) {
         getAPIService.set(url: url)
         getAPIService.callGetAPI(model: Pokemons.self) { response in
             switch response {
-            case .success(let pokemons):
-                return onCompletion(.success(pokemons))
+            case .success(let pokemonsData):
+                self.pokemons = pokemonsData
+                let group = DispatchGroup()
+                
+                for (index, pokemon) in pokemonsData.result.enumerated() {
+                    group.enter()
+                    self.getPokemonListImageService?.getPokemonDetailImage(from: pokemon.url) { imageDetail in
+                        self.pokemons?.result[index].image = imageDetail
+                        group.leave()
+                    }
+                }
+                
+                group.notify(queue: .main) {
+                    return onCompletion(self.pokemons, nil)
+                }
                 
             case .failure(let error):
-                return onCompletion(.failure(error))
+                return onCompletion(nil, error.localizedDescription)
             }
         }
     }

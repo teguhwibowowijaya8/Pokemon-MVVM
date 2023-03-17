@@ -81,7 +81,6 @@ extension PokemonListViewController: UICollectionViewDelegateFlowLayout, UIColle
               let pokemonCell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonCollectionViewCell.identifier, for: indexPath) as? PokemonCollectionViewCell
         else { return UICollectionViewCell() }
         
-        pokemonCell.delegate = self
         pokemonCell.setupCell(with: pokemon)
         
         return pokemonCell
@@ -95,11 +94,5 @@ extension PokemonListViewController: UICollectionViewDelegateFlowLayout, UIColle
             pokemonDetailVC.detailUrl = pokemon.url
             self.navigationController?.pushViewController(pokemonDetailVC, animated: true)
         }
-    }
-}
-
-extension PokemonListViewController: PokemonCollectionCellDelegate {
-    func getImageURL(of detailUrl: String, onCompletion: @escaping (String?) -> Void) {
-        self.pokemonListViewModel?.getPokemonDetailImage(of: detailUrl, onCompletion: onCompletion)
     }
 }
