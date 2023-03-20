@@ -38,16 +38,22 @@ class PokemonCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private let defaultImage: UIImage? = UIImage(systemName: "star")
+    var imageUrlString = ""
+    private let defaultImage: UIImage? = UIImage(named: "pokemon")
     private var getPokemonListImageService: GetPokemonListImageService?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        //        pokemonImageView.image = defaultImage
     }
     
     func setupCell(with pokemon: PokemonModel) {
-        self.pokemonImageView.loadImage(from: pokemon.image?.sprites.imageUrlString, withPlaceholder: self.defaultImage)
+        if let pokemonImage = pokemon.image?.sprites.imageUrlString, imageUrlString != pokemonImage {
+            imageUrlString = pokemonImage
+            pokemonImageView.image = defaultImage
+            self.pokemonImageView.loadImage(from: pokemon.image?.sprites.imageUrlString, withPlaceholder: self.defaultImage)
+        }
         
         pokemonNameLabel.text = pokemon.name.capitalized(with: .current)
     }

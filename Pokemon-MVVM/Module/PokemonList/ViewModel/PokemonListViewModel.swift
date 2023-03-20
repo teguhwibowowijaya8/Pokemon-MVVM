@@ -9,35 +9,53 @@ import UIKit
 
 protocol PokemonListViewModelDelegate {
     func onPokemonListFetched(errorMessage: String?)
+    func showLoadingIndicator()
 }
 
 class PokemonListViewModel {
-    var pokemons: PokemonsModel?
-    var isLoading = false
+    private(set) var pokemons: PokemonsModel?
+    private(set) var isLoading = false
     var errorMessage: String?
-    var currentCount: Int
-    
+    private(set) var currentCount: Int = 0
+    private(set) var isEndReach = false
+    let limitFetch = 10
+    private(set) var fetchTimes = 0
+
     private var getPokemonListService: GetPokemonListService
     private var getPokemonListImageService: GetPokemonListImageService
-    private var baseUrlString = "https://pokeapi.co/api/v2/pokemon?limit=30"
+    private var baseUrlString = "https://pokeapi.co/api/v2/pokemon"
     
     var delegate: PokemonListViewModelDelegate?
     
     init() {
         getPokemonListService = GetPokemonListService()
         getPokemonListImageService = GetPokemonListImageService()
-        currentCount = 0
+    }
+    
+    func getPokemonsUrl() -> String? {
+        var url = URLComponents(string: baseUrlString)
+        url?.queryItems = [
+            URLQueryItem(name: "limit", value: "\(limitFetch)"),
+            URLQueryItem(name: "offset", value: "\(fetchTimes * limitFetch)")
+        ]
+        
+        return url?.string
     }
     
     func getPokemonList() {
         guard isLoading == false,
-            let urlString = pokemons == nil ? baseUrlString : pokemons?.next
+              isEndReach == false,
+              let urlString = getPokemonsUrl()
         else { return }
-        isLoading = true
+
+        showLoadingIndicator()
         errorMessage = nil
+        
         getPokemonListService.getPokemonList(url: urlString) { pokemonsData, error in
             if let pokemonsData = pokemonsData {
+                self.fetchTimes += 1
                 self.appendPokemons(with: pokemonsData)
+                self.errorMessage = nil
                 self.delegate?.onPokemonListFetched(errorMessage: nil)
             } else if let error = error {
                 self.errorMessage = error
@@ -45,6 +63,11 @@ class PokemonListViewModel {
             }
             self.isLoading = false
         }
+    }
+    
+    func showLoadingIndicator() {
+        isLoading = true
+        delegate?.showLoadingIndicator()
     }
     
     func appendPokemons(with pokemonsData: PokemonsModel) {
@@ -56,8 +79,10 @@ class PokemonListViewModel {
             self.pokemons?.previous = pokemonsData.previous
         }
         
-        if let count = self.pokemons?.result.count {
-            self.currentCount = count - 1
+        if let pokemons = self.pokemons {
+            if pokemons.result.count >= pokemons.count
+                { isEndReach = true }
+            self.currentCount = pokemons.result.count - 1
         }
     }
 }
