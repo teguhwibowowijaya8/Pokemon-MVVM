@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -30,11 +31,11 @@
                                         <rect key="frame" x="0.0" y="192.33333333333334" width="301" height="1"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="Iki-OK-4TK"/>
+                                            <constraint firstAttribute="height" priority="999" constant="1" id="Iki-OK-4TK"/>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="EGh-P3-8ey" firstAttribute="leading" secondItem="8rB-hj-yBg" secondAttribute="leading" id="0hK-0u-22L"/>
                                     <constraint firstAttribute="trailing" secondItem="rKo-6I-P4j" secondAttribute="trailing" id="Hvp-zy-RGa"/>
@@ -76,6 +77,7 @@
             <size key="customSize" width="301" height="322"/>
             <connections>
                 <outlet property="pokemonCardView" destination="Vos-az-5Xj" id="8UX-JK-XXd"/>
+                <outlet property="pokemonImageContainerView" destination="8rB-hj-yBg" id="nti-X2-ASp"/>
                 <outlet property="pokemonImageSeparatorView" destination="rKo-6I-P4j" id="uFH-Lu-J4Z"/>
                 <outlet property="pokemonImageView" destination="EGh-P3-8ey" id="ZBH-Rn-7we"/>
                 <outlet property="pokemonNameLabel" destination="zhp-1W-qBj" id="b5Z-Ij-Woi"/>

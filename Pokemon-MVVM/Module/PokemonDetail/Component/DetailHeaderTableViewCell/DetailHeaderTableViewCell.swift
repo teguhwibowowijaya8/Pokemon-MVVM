@@ -22,7 +22,13 @@ class DetailHeaderTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var pokemonImageContainerView: UIView!
+    @IBOutlet weak var pokemonImageContainerView: UIView! {
+        didSet {
+            pokemonImageContainerView.layer.borderColor = UIColor.black.cgColor
+            pokemonImageContainerView.layer.borderWidth = 10
+        }
+    }
+    
     @IBOutlet weak var pokemonImageView: UIImageView! {
         didSet {
             pokemonImageView.contentMode = .scaleAspectFit

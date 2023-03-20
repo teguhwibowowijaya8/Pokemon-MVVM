@@ -9,12 +9,19 @@ import UIKit
 
 class PokemonCollectionViewCell: UICollectionViewCell {
     static let identifier = "PokemonCollectionViewCell"
-    
+        
     @IBOutlet weak var pokemonCardView: UIView! {
         didSet {
             pokemonCardView.layer.cornerRadius = 10
             pokemonCardView.layer.borderColor = UIColor.black.cgColor
-            pokemonCardView.layer.borderWidth = 1
+            pokemonCardView.layer.borderWidth = borderWidth
+        }
+    }
+    
+    
+    @IBOutlet weak var pokemonImageContainerView: UIView! {
+        didSet {
+            pokemonImageContainerView.backgroundColor = .gray.withAlphaComponent(0.3)
         }
     }
     
@@ -27,6 +34,9 @@ class PokemonCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var pokemonImageSeparatorView: UIView! {
         didSet {
             pokemonImageSeparatorView.backgroundColor = .black
+            let height = pokemonImageSeparatorView.heightAnchor.constraint(equalToConstant: borderWidth)
+            height.priority = .required
+            height.isActive = true
         }
     }
     
@@ -39,6 +49,7 @@ class PokemonCollectionViewCell: UICollectionViewCell {
     }
     
     var imageUrlString = ""
+    private let borderWidth: CGFloat = 2
     private let defaultImage: UIImage? = UIImage(named: "pokemon")
     private var getPokemonListImageService: GetPokemonListImageService?
     
@@ -49,7 +60,9 @@ class PokemonCollectionViewCell: UICollectionViewCell {
     }
     
     func setupCell(with pokemon: PokemonModel) {
-        if let pokemonImage = pokemon.image?.sprites.imageUrlString, imageUrlString != pokemonImage {
+        if let pokemonImage = pokemon.image?.sprites.imageUrlString,
+            imageUrlString != pokemonImage
+        {
             imageUrlString = pokemonImage
             pokemonImageView.image = defaultImage
             self.pokemonImageView.loadImage(from: pokemon.image?.sprites.imageUrlString, withPlaceholder: self.defaultImage)
