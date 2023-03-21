@@ -56,7 +56,6 @@ class PokemonCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        //        pokemonImageView.image = defaultImage
     }
     
     func setupCell(with pokemon: PokemonModel) {

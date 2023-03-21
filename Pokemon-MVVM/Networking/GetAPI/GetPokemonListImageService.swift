@@ -15,10 +15,10 @@ protocol GetPokemonListImageProtocol {
 }
 
 struct GetPokemonListImageService: GetPokemonListImageProtocol {
-    private var getAPIService: GetAPIService
+    private var getAPIService: GetAPIProtocol
     
-    init() {
-        self.getAPIService = GetAPIService()
+    init(getAPIService: GetAPIProtocol = GetAPIService()) {
+        self.getAPIService = getAPIService
     }
     
     mutating func getPokemonDetailImage(

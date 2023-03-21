@@ -15,11 +15,11 @@ protocol GetPokemonDetailProtocol {
 }
 
 class GetPokemonDetailService: GetPokemonDetailProtocol {
-    var getAPIService: GetAPIService
-    var getMoveDetailService: GetPokemonMoveDetailService
-    var pokemonDetail: PokemonDetailModel?
+    private var getAPIService: GetAPIProtocol
+    private var getMoveDetailService: GetPokemonMoveDetailService
+    private var pokemonDetail: PokemonDetailModel?
     
-    init(getAPIService: GetAPIService = GetAPIService()) {
+    init(getAPIService: GetAPIProtocol = GetAPIService()) {
         self.getAPIService = getAPIService
         self.getMoveDetailService = GetPokemonMoveDetailService()
     }
