@@ -48,7 +48,21 @@ class GetPokemonListService {
                 }
                 
             case .failure(let error):
-                return onCompletion(nil, error.localizedDescription)
+                let errorMessage: String
+                switch error {
+                case .fetchError(let errorString):
+                    errorMessage = errorString
+                    
+                case .invalidUrl:
+                    errorMessage = "URL is invalid, please download the latest version of the App, or contact our customer service."
+                    
+                case .noData:
+                    errorMessage = "No Data Available"
+                    
+                case .parseError:
+                    errorMessage = "Error when parsing JSON to Model, please download the latest version of the App, or contact our customer service."
+                }
+                return onCompletion(nil, errorMessage)
             }
         }
     }

@@ -10,6 +10,7 @@ import UIKit
 enum PokemonListSection: Int {
     case pokemonList
     case loader
+    case error
 }
 
 class PokemonListViewController: UIViewController {
@@ -36,10 +37,11 @@ class PokemonListViewController: UIViewController {
     func setupViewModel() {
         pokemonListViewModel = PokemonListViewModel()
         pokemonListViewModel?.delegate = self
-        pokemonListViewModel?.getPokemonList()
+        pokemonListViewModel?.getPokemonList(reloadLoader: false)
     }
     
     func setupCollectionView() {
+        pokemonListCollectionView.isUserInteractionEnabled = true
         pokemonListCollectionView.collectionViewLayout = collectionViewFlowLayout()
         pokemonListCollectionView.delegate = self
         pokemonListCollectionView.dataSource = self
@@ -48,6 +50,8 @@ class PokemonListViewController: UIViewController {
         pokemonListCollectionView.register(pokemonCell, forCellWithReuseIdentifier: PokemonCollectionViewCell.identifier)
         
         pokemonListCollectionView.register(LoaderCollectionViewCell.self, forCellWithReuseIdentifier: LoaderCollectionViewCell.identifier)
+        
+        pokemonListCollectionView.register(ErrorCollectionViewCell.self, forCellWithReuseIdentifier: ErrorCollectionViewCell.identifier)
     }
     
     func collectionViewFlowLayout() -> UICollectionViewFlowLayout {
@@ -59,9 +63,15 @@ class PokemonListViewController: UIViewController {
 }
 
 extension PokemonListViewController: PokemonListViewModelDelegate {
-    func onPokemonListFetched(errorMessage: String?) {
-        if let errorMessage = errorMessage {
-            print(errorMessage)
+    func onPokemonListFetched() {
+        if pokemonListViewModel?.errorMessage != nil {
+            DispatchQueue.main.async {
+                self.pokemonListCollectionView.reloadSections(IndexSet([
+                    PokemonListSection.loader.rawValue,
+                    PokemonListSection.error.rawValue
+                ]))
+            }
+            
         } else if let viewModel = pokemonListViewModel {
             let pokemonListSection = PokemonListSection.pokemonList.rawValue
             var loadRows = [IndexPath]()
@@ -73,19 +83,25 @@ extension PokemonListViewController: PokemonListViewModelDelegate {
             }
             
             DispatchQueue.main.async {
-                if self.pokemonListViewModel?.isLoading == true {
-                    self.pokemonListCollectionView.deleteItems(at: [
-                        IndexPath(row: 0, section: 1)
-                    ])
-                }
                 self.pokemonListCollectionView.insertItems(at: loadRows)
+                self.pokemonListCollectionView.reloadSections(IndexSet(integer: PokemonListSection.loader.rawValue))
             }
         }
     }
     
     func showLoadingIndicator() {
         DispatchQueue.main.async {
-            self.pokemonListCollectionView.reloadSections(IndexSet(integer: 1))
+            self.pokemonListCollectionView.reloadSections(
+                IndexSet(integer: PokemonListSection.loader.rawValue)
+            )
+        }
+    }
+    
+    func hideErrorView() {
+        DispatchQueue.main.async {
+            self.pokemonListCollectionView.reloadSections(
+                IndexSet(integer: PokemonListSection.error.rawValue)
+            )
         }
     }
 }
@@ -105,7 +121,14 @@ extension PokemonListViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: itemWidth, height: 220)
             
         case .loader:
-            return CGSize(width: viewWidth, height: 80)
+            return pokemonListViewModel?.isLoading == true ?
+            CGSize(width: viewWidth, height: 80) :
+                .zero
+            
+        case .error:
+            return pokemonListViewModel?.errorMessage != nil ?
+            CGSize(width: viewWidth, height: 200) :
+                .zero
             
         case .none:
             return .zero
@@ -127,7 +150,7 @@ extension PokemonListViewController: UICollectionViewDelegateFlowLayout {
 
 extension PokemonListViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -138,7 +161,7 @@ extension PokemonListViewController: UICollectionViewDataSource {
             else { return 0 }
             return pokemonsCount + 1
             
-        case .loader:
+        case .loader, .error:
             return 1
             
         case .none:
@@ -162,14 +185,38 @@ extension PokemonListViewController: UICollectionViewDataSource {
         case .loader:
             guard let loaderCell = collectionView.dequeueReusableCell(withReuseIdentifier: LoaderCollectionViewCell.identifier, for: indexPath) as? LoaderCollectionViewCell
             else { return UICollectionViewCell() }
-            
-            loaderCell.setupCell()
+
+            if pokemonListViewModel?.isLoading == true {
+                loaderCell.setupCell()
+            } else {
+                loaderCell.removeFromSuperview()
+            }
             
             return loaderCell
+            
+            
+        case .error:
+            guard let errorCell = collectionView.dequeueReusableCell(withReuseIdentifier: ErrorCollectionViewCell.identifier, for: indexPath) as? ErrorCollectionViewCell
+            else { return UICollectionViewCell() }
+
+            if let errorMessage = pokemonListViewModel?.errorMessage {
+                errorCell.delegate = self
+                errorCell.setupCell(errorMessage: errorMessage)
+            } else {
+                errorCell.removeFromSuperview()
+            }
+            
+            return errorCell
+            
             
         case .none:
             return UICollectionViewCell()
         }
+    }
+    
+    @objc func onReloadButtonSelected(_ sender: UIButton) {
+        print("selected bangsat")
+        pokemonListViewModel?.getPokemonList(reloadError: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -189,12 +236,14 @@ extension PokemonListViewController: UICollectionViewDataSource {
               currCount > 0
         else { return }
         
-        if indexPath.section == 1 && indexPath.row == 0 && pokemonListViewModel?.isLoading == true {
-            collectionView.insertItems(at: [IndexPath(row: 0, section: 1)])
-            
-        }
         if indexPath.row == currCount - 1 {
             pokemonListViewModel?.getPokemonList()
         }
+    }
+}
+
+extension PokemonListViewController: ErrorViewProtocol {
+    func onReloadButtonSelected() {
+        pokemonListViewModel?.getPokemonList(reloadError: true)
     }
 }

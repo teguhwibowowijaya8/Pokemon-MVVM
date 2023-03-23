@@ -19,6 +19,8 @@
 		7AC6ABED29C3F3780014CAF7 /* GetPokemonMoveDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC6ABEC29C3F3780014CAF7 /* GetPokemonMoveDetailService.swift */; };
 		7AC6ABF629C7E8320014CAF7 /* ListLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC6ABF529C7E8320014CAF7 /* ListLoaderView.swift */; };
 		7AC6ABFA29C813550014CAF7 /* LoaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC6ABF929C813550014CAF7 /* LoaderCollectionViewCell.swift */; };
+		7AC6ABFC29C95BDA0014CAF7 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC6ABFB29C95BDA0014CAF7 /* ErrorView.swift */; };
+		7AC6AC0229C991A20014CAF7 /* ErrorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC6AC0129C991A20014CAF7 /* ErrorCollectionViewCell.swift */; };
 		7AF68B9729C1BB3A00B0AFA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF68B9629C1BB3A00B0AFA0 /* AppDelegate.swift */; };
 		7AF68B9929C1BB3A00B0AFA0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF68B9829C1BB3A00B0AFA0 /* SceneDelegate.swift */; };
 		7AF68B9B29C1BB3A00B0AFA0 /* PokemonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF68B9A29C1BB3A00B0AFA0 /* PokemonListViewController.swift */; };
@@ -60,6 +62,8 @@
 		7AC6ABEC29C3F3780014CAF7 /* GetPokemonMoveDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPokemonMoveDetailService.swift; sourceTree = "<group>"; };
 		7AC6ABF529C7E8320014CAF7 /* ListLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListLoaderView.swift; sourceTree = "<group>"; };
 		7AC6ABF929C813550014CAF7 /* LoaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		7AC6ABFB29C95BDA0014CAF7 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		7AC6AC0129C991A20014CAF7 /* ErrorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCollectionViewCell.swift; sourceTree = "<group>"; };
 		7AF68B9329C1BB3A00B0AFA0 /* Pokemon-MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pokemon-MVVM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AF68B9629C1BB3A00B0AFA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AF68B9829C1BB3A00B0AFA0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 				7AC6ABD629C218860014CAF7 /* PokemonCollectionViewCell.swift */,
 				7AC6ABD729C218860014CAF7 /* PokemonCollectionViewCell.xib */,
 				7AC6ABF929C813550014CAF7 /* LoaderCollectionViewCell.swift */,
+				7AC6AC0129C991A20014CAF7 /* ErrorCollectionViewCell.swift */,
 			);
 			path = PokemonCollectionViewCell;
 			sourceTree = "<group>";
@@ -142,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				7AC6ABF529C7E8320014CAF7 /* ListLoaderView.swift */,
+				7AC6ABFB29C95BDA0014CAF7 /* ErrorView.swift */,
 			);
 			path = SharedComponent;
 			sourceTree = "<group>";
@@ -472,8 +478,10 @@
 				7AF68BCD29C1CB2A00B0AFA0 /* EffectModel.swift in Sources */,
 				7AF68B9929C1BB3A00B0AFA0 /* SceneDelegate.swift in Sources */,
 				7AC6ABDC29C2AA840014CAF7 /* PokemonListViewModel.swift in Sources */,
+				7AC6AC0229C991A20014CAF7 /* ErrorCollectionViewCell.swift in Sources */,
 				7AC6ABD829C218860014CAF7 /* PokemonCollectionViewCell.swift in Sources */,
 				7AF68BD029C1CBE600B0AFA0 /* EffectLanguage.swift in Sources */,
+				7AC6ABFC29C95BDA0014CAF7 /* ErrorView.swift in Sources */,
 				7AC6ABE529C2B1B30014CAF7 /* PokemonDetailImageModel.swift in Sources */,
 				7AF68BB929C1C0B300B0AFA0 /* StatsModel.swift in Sources */,
 				7AC6ABFA29C813550014CAF7 /* LoaderCollectionViewCell.swift in Sources */,

@@ -8,8 +8,9 @@
 import UIKit
 
 protocol PokemonListViewModelDelegate {
-    func onPokemonListFetched(errorMessage: String?)
+    func onPokemonListFetched()
     func showLoadingIndicator()
+    func hideErrorView()
 }
 
 class PokemonListViewModel {
@@ -42,32 +43,39 @@ class PokemonListViewModel {
         return url?.string
     }
     
-    func getPokemonList() {
+    func getPokemonList(
+        reloadLoader: Bool = true,
+        reloadError: Bool = false
+    ) {
         guard isLoading == false,
               isEndReach == false,
               let urlString = getPokemonsUrl()
         else { return }
 
-        showLoadingIndicator()
+        isLoading = true
+        if reloadLoader { showLoadingIndicator() }
         errorMessage = nil
+        if reloadError { hideErrorView() }
         
         getPokemonListService.getPokemonList(url: urlString) { pokemonsData, error in
             if let pokemonsData = pokemonsData {
                 self.fetchTimes += 1
                 self.appendPokemons(with: pokemonsData)
-                self.errorMessage = nil
-                self.delegate?.onPokemonListFetched(errorMessage: nil)
+                self.delegate?.onPokemonListFetched()
             } else if let error = error {
                 self.errorMessage = error
-                self.delegate?.onPokemonListFetched(errorMessage: error)
+                self.delegate?.onPokemonListFetched()
             }
             self.isLoading = false
         }
     }
     
     func showLoadingIndicator() {
-        isLoading = true
         delegate?.showLoadingIndicator()
+    }
+    
+    func hideErrorView() {
+        delegate?.hideErrorView()
     }
     
     func appendPokemons(with pokemonsData: PokemonsModel) {

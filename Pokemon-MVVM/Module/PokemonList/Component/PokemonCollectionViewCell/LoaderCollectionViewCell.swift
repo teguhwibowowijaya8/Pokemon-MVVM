@@ -19,7 +19,6 @@ class LoaderCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setupCell()
     }
     
     func setupCell() {
@@ -32,5 +31,4 @@ class LoaderCollectionViewCell: UICollectionViewCell {
             listLoaderView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
-
 }

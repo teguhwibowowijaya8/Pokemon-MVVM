@@ -15,6 +15,7 @@ class PokemonCollectionViewCell: UICollectionViewCell {
             pokemonCardView.layer.cornerRadius = 10
             pokemonCardView.layer.borderColor = UIColor.black.cgColor
             pokemonCardView.layer.borderWidth = borderWidth
+            pokemonCardView.clipsToBounds = true
         }
     }
     
