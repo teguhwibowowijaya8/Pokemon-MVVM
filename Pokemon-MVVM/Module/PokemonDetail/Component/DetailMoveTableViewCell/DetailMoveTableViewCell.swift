@@ -10,10 +10,13 @@ import UIKit
 class DetailMoveTableViewCell: UITableViewCell {
     static let identifier = "DetailMoveTableViewCell"
     
-    @IBOutlet weak var pokemonMoveTextView: UITextView! {
+    @IBOutlet weak var moveDetailContainerView: UIView!
+    @IBOutlet weak var moveNameLabel: UILabel!
+    
+    @IBOutlet weak var moveDescriptionTextView: UITextView! {
         didSet {
-            pokemonMoveTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            pokemonMoveTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            moveDescriptionTextView.textContainerInset = .zero
+            moveDescriptionTextView.contentInset = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: -4)
         }
     }
     
@@ -31,38 +34,67 @@ class DetailMoveTableViewCell: UITableViewCell {
         }
     }
     
+    @IBOutlet weak var moveDescriptionHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var moveDescriptionTopAnchorConstraint: NSLayoutConstraint!
+    @IBOutlet weak var moveDescriptionBottomAnchorConstraint: NSLayoutConstraint!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    func setupCell(moveName: String, moveDetail: MoveDetailModel?) {
-        let move = setupMoveName(moveName.capitalized(with: .current))
+    func setupCell(
+        moveName: String,
+        moveDetail: MoveDetailModel?,
+        hideMoveDescription: Bool = true
+    ) {
+        var moveDescription: NSAttributedString? = nil
         var moveEffectiveness: String = "0"
         
         if let moveDetail = moveDetail {
             moveEffectiveness = setupMoveEffectiveness(with: moveDetail.accuracy, power: moveDetail.power, pp: moveDetail.pp)
             
             if let effect = moveDetail.effectString {
-                let moveEffect = NSAttributedString(
-                    string: "\n\n\(effect)",
+                moveDescription = NSAttributedString(
+                    string: effect,
                     attributes: [
                         .font: UIFont.systemFont(ofSize: 14)
                     ])
-                move.append(moveEffect)
             }
         }
         
-        self.pokemonMoveTextView.attributedText = move
+        if moveDescription == nil || hideMoveDescription {
+            moveDescriptionTextView.text = ""
+            moveDescriptionTextView.isHidden = true
+            hideMoveDescriptionConstraints()
+        }
+        else {
+            moveDescriptionTextView.isHidden = false
+            self.moveDescriptionTextView.attributedText = moveDescription
+            showMoveDescriptionConstraints()
+        }
+        
+        self.moveNameLabel.attributedText = NSAttributedString(
+            string: moveName.capitalized(with: .current),
+            attributes: [
+                .font: UIFont.boldSystemFont(ofSize: 18)
+            ]
+        )
+        
         self.pokemonMoveEffectivenessLabel.text = moveEffectiveness
     }
     
-    private func setupMoveName(_ name: String) -> NSMutableAttributedString {
-        let attributedString = NSMutableAttributedString(string: name, attributes: [
-            .font: UIFont.boldSystemFont(ofSize: 18)
-        ])
-        
-        return attributedString
+    func hideMoveDescriptionConstraints() {
+        moveDescriptionHeightConstraint.priority = .defaultHigh
+        moveDescriptionTopAnchorConstraint.constant = -7
+        moveDescriptionBottomAnchorConstraint.constant = 0
+    }
+    
+    func showMoveDescriptionConstraints() {
+        moveDescriptionHeightConstraint.priority = .defaultLow
+        moveDescriptionTopAnchorConstraint.constant = 8
+        moveDescriptionBottomAnchorConstraint.constant = 8
     }
     
     func setupMoveEffectiveness(with accuracy: Int?, power: Int?, pp: Int?) -> String {

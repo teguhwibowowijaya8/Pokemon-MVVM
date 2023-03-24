@@ -107,15 +107,27 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
             else { return UITableViewCell() }
             
             let move = pokemonDetail.moves[indexPath.row].move
+            let hideMoveDescription = pokemonDetail.moves[indexPath.row].hideDescription ?? true
+            
             moveCell.setupCell(
-                moveName: move.name, moveDetail: move.moveDetail)
+                moveName: move.name,
+                moveDetail: move.moveDetail,
+                hideMoveDescription: hideMoveDescription
+            )
             
             return moveCell
             
         }
     }
     
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == PokemonDetailSection.moves.rawValue {
+            pokemonDetailViewModel?.pokemonDetail?.moves[indexPath.row].hideDescription?.toggle()
+            DispatchQueue.main.async {
+                tableView.reloadRows(at: [
+                    IndexPath(row: indexPath.row, section: indexPath.section)
+                ], with: .automatic)
+            }
+        }
     }
 }
